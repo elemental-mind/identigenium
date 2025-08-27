@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "source/identigenium.js",
+  "exports": {
+    ".": "./source/identigenium.js",
+    "./sets": "./source/asciiSets.js"
+  },
   "scripts": {
     "test": "node --experimental-transform-types --no-warnings test/test.ts"
   },
