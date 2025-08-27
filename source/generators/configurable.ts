@@ -1,5 +1,10 @@
 import type { IDSource } from '../identigenium.ts';
 
+/**
+ * A configurable ID provider that generates unique identifiers using a specified character set,
+ * prefix, and starting counter value. This provider allows for customizable ID generation
+ * with support for resuming from a specific counter position.
+ */
 export class ConfigurableIDProvider implements IDSource
 {
     #charSet: String[];
@@ -9,20 +14,34 @@ export class ConfigurableIDProvider implements IDSource
 
     public idStream: Generator<string, string, void>;
 
+    /**
+     * Gets the number of already generated IDs.
+     * @returns The current counter value representing the number of IDs generated so far.
+     */
     get idCounter()
     {
         return this.#counter;
     }
 
-    set idCounter(newEpoch: number)
+    /**
+     * Sets the number of already generated IDs. This allows resuming ID generation from a specific point.
+     * @param newCounterValue - The new counter value to set. Warning: Setting to less than current count risks duplicate ID generation.
+     */
+    set idCounter(newCounterValue: number)
     {
-        if (newEpoch < this.#counter)
+        if (newCounterValue < this.#counter)
             console.warn("Setting ID counter to less than current count. Risk of duplicate ID generation.");
 
-        this.#counter = newEpoch;
-        this.idStream = this.#epochUpdatingIdGenerator(newEpoch);
+        this.#counter = newCounterValue;
+        this.idStream = this.#epochUpdatingIdGenerator(newCounterValue);
     }
 
+    /**
+     * Creates a new ConfigurableIDProvider instance.
+     * @param permittedCharacters - A string containing all allowed characters for ID generation. MUST be a string of unique characters; this is not checked.
+     * @param startWithCounter - The initial counter value to start ID generation from (default: 0)
+     * @param prefix - An optional prefix to prepend to all generated IDs (default: "")
+     */
     constructor(permittedCharacters: string, startWithCounter: number = 0, prefix: string = "")
     {
         this.#charSet = permittedCharacters.split("");
