@@ -20,19 +20,21 @@ export class IncrementalIDProvider implements IDSource
     {
         this.#prefix = prefix;
         this.#charSet = permittedCharacters.split("");
-        this.idStream = this.idGenerator();
+        this.idStream = this.#idGenerator();
     }
 
-    protected *idGenerator()
+    *#idGenerator(): Generator<string, string, void>
     {
         //We first generate a sequence of base digits
         for (const baseDigit of this.#charSet)
             yield this.#prefix + baseDigit;
 
         //Then we append to the superdigits
-        for (const superDigits of this.idGenerator())
+        for (const superDigits of this.#idGenerator())
             for (const baseDigit of this.#charSet)
                 yield superDigits + baseDigit;
+
+        return "";
     }
 
     generateID()
