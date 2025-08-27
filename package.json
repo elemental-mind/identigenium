@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dry-update": "tsc",
-    "patch": "tsc && npm version patch && git push && npm publish",
-    "release": "tsc && npm version minor && git push && npm publish",
+    "patch": "tsc && npm version patch && git push --tags && npm publish",
+    "release": "tsc && npm version minor && git push --tags && npm publish",
     "test": "node --experimental-transform-types --no-warnings test/test.ts"
   },
   "keywords": [
