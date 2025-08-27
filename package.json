@@ -26,6 +26,10 @@
   ],
   "author": "Magnus Meseck",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elemental-mind/identigenium.git"
+  },
   "type": "module",
   "devDependencies": {
     "@types/node": "^24.3.0"
