@@ -2,10 +2,10 @@
   "name": "identigenium",
   "version": "1.0.0",
   "description": "Generate unique identifiers with configurable character sets and prefixes. Super tiny (tree-shakeable, base is 142 bytes, minified + bzipped)",
-  "main": "source/identigenium.js",
+  "main": "distribution/identigenium.js",
   "exports": {
-    ".": "./source/identigenium.js",
-    "./sets": "./source/asciiSets.js"
+    ".": "./distribution/identigenium.js",
+    "./sets": "./distribution/asciiSets.js"
   },
   "scripts": {
     "dry-update": "tsc",
