@@ -69,7 +69,7 @@ console.log(provider.generateID()); // 'z'
 console.log(provider.idCounter);      //  6
 ```
 
-### Dynamic Epoch Adjustment
+### Dynamic Counter Adjustment
 
 ```typescript
 import { ConfigurableIDProvider } from 'identigenium';
