@@ -1,5 +1,7 @@
 .vscode
+.gitignore
 node_modules
 examples
 source
+test
 tsconfig.json
