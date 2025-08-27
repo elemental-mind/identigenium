@@ -5,31 +5,31 @@ export class ConfigurableIDProvider implements IDSource
     #charSet: String[];
     #prefix: string;
     #charSetLength: number;
-    #epoch = 0;
-    
+    #counter = 0;
+
     public idStream: Generator<string, string, void>;
 
-    get idEpoch()
+    get idCounter()
     {
-        return this.#epoch;
+        return this.#counter;
     }
 
-    set idEpoch(newEpoch: number)
+    set idCounter(newEpoch: number)
     {
-        if (newEpoch < this.#epoch)
-            console.warn("Setting ID epoch to less than current epoch. Risk of duplicate ID generation.");
+        if (newEpoch < this.#counter)
+            console.warn("Setting ID counter to less than current count. Risk of duplicate ID generation.");
 
-        this.#epoch = newEpoch;
+        this.#counter = newEpoch;
         this.idStream = this.#epochUpdatingIdGenerator(newEpoch);
     }
 
-    constructor(permittedCharacters: string, startEpoch: number = 0, prefix: string = "")
+    constructor(permittedCharacters: string, startWithCounter: number = 0, prefix: string = "")
     {
         this.#charSet = permittedCharacters.split("");
         this.#prefix = prefix;
         this.#charSetLength = this.#charSet.length;
-        this.#epoch = startEpoch;
-        this.idStream = this.#epochUpdatingIdGenerator(startEpoch);
+        this.#counter = startWithCounter;
+        this.idStream = this.#epochUpdatingIdGenerator(startWithCounter);
     }
 
     *#epochUpdatingIdGenerator(startEpoch: number): Generator<string, string, void>
@@ -37,7 +37,7 @@ export class ConfigurableIDProvider implements IDSource
         const idGenerator = this.#idGenerator(startEpoch);
         while (true)
         {
-            this.#epoch++;
+            this.#counter++;
             yield idGenerator.next().value;
         }
     }

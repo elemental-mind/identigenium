@@ -6,13 +6,13 @@ export class ConfigurableIDTests
     shouldHaveConfigurableStartEpoch()
     {
         const provider = new ConfigurableIDProvider('abc', 5, 'pre');
-        assert.equal(provider.idEpoch, 5);
+        assert.equal(provider.idCounter, 5);
     }
 
     shouldInitializeEpochToZeroByDefault()
     {
         const provider = new ConfigurableIDProvider('123');
-        assert.equal(provider.idEpoch, 0);
+        assert.equal(provider.idCounter, 0);
         
     }
 
@@ -35,11 +35,11 @@ export class ConfigurableIDTests
     shouldUpdateEpochAfterIdGeneration()
     {
         const provider = new ConfigurableIDProvider('ab', 0);
-        assert.equal(provider.idEpoch, 0);
+        assert.equal(provider.idCounter, 0);
         provider.generateID();
-        assert.equal(provider.idEpoch, 1);
+        assert.equal(provider.idCounter, 1);
         provider.generateID();
-        assert.equal(provider.idEpoch, 2);
+        assert.equal(provider.idCounter, 2);
     }
 
     shouldGenerateIdsWithPrefix()
@@ -63,8 +63,8 @@ export class ConfigurableIDTests
     epochShouldBeAdjustable()
     {
         const provider = new ConfigurableIDProvider('ab', 0);
-        provider.idEpoch = 3;
-        assert.equal(provider.idEpoch, 3);
+        provider.idCounter = 3;
+        assert.equal(provider.idCounter, 3);
     }
 
     epochShouldBeAdjustableAfterGeneration()
@@ -72,9 +72,9 @@ export class ConfigurableIDTests
         const provider = new ConfigurableIDProvider('ab', 0);
         provider.generateID();
         provider.generateID();
-        assert.equal(provider.idEpoch, 2);
-        provider.idEpoch = 0;
-        assert.equal(provider.idEpoch, 0);
+        assert.equal(provider.idCounter, 2);
+        provider.idCounter = 0;
+        assert.equal(provider.idCounter, 0);
         assert.equal(provider.generateID(), 'a');
     }
 }
