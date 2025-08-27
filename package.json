@@ -1,0 +1,13 @@
+{
+  "name": "identigenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "source/identigenium.js",
+  "scripts": {
+    "test": "node --experimental-transform-types --no-warnings test/test.ts"
+  },
+  "keywords": [],
+  "author": "Magnus Meseck",
+  "license": "MIT",
+  "type": "module"
+}
