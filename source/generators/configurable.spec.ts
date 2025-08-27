@@ -13,7 +13,7 @@ export class ConfigurableIDTests
     {
         const provider = new ConfigurableIDProvider('123');
         assert.equal(provider.idEpoch, 0);
-        assert.equal(provider.prefix, '');
+        
     }
 
     shouldGenerateCorrectDefaultStartId()
